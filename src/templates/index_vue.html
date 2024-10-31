@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static app_tags %}
+{% block main_container %}
+
+<div class="main-app">
+  <div >
+    Vue version
+  </div>
+</div>
+{% endblock %}
+{% block footer_scripts %}
+{% load_script_hash 'vue_app.js' %}
+{% endblock %}

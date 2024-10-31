@@ -1,5 +1,9 @@
 from django.views.generic import TemplateView
 
 
-class HomeView(TemplateView):
-    template_name = "index.html"
+class VueHomeView(TemplateView):
+    template_name = "index_vue.html"
+
+
+class ReactHomeView(TemplateView):
+    template_name = "index_react.html"

@@ -27,5 +27,6 @@ urlpatterns = [
     ),
     path("api/", include(("config.api_urls", "api"))),
     path("pl-<hash:token>", UrlDispatcherView.as_view(), name="url_dispatcher"),
-    path("", home_views.HomeView.as_view(), name="home"),
+    path("react", home_views.ReactHomeView.as_view(), name="home"),
+    path("", home_views.VueHomeView.as_view(), name="home"),
 ]

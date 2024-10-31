@@ -3,7 +3,7 @@ class HashConverter(object):
     Used in urls.py as hash pattern
     """
 
-    regex = "[0-9a-f]{32,40}"
+    regex = "^[0-9a-zA-Z_-]$"
 
     def to_python(self, value):
         return str(value)

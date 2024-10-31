@@ -1,0 +1,30 @@
+{% load i18n static app_tags %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<link type="image/x-icon" rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+<title>{% translate 'App' %}</title>
+{% load_style_hash 'styles_app_main.css' %}
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
+  <style>
+    .darktheme {
+      background-color: #000;
+      color: #FFF;
+    }
+  </style>
+{% block extra_header %}{% endblock %}
+</head>
+{#% spaceless %#}
+<body class="common-container">
+<div class="full-content-wrapper orca-main-controller">
+  <div class="overall-wrapper" id="id-overall-wrapper">
+    {% block main_container %}{% endblock %}
+  </div>
+</div>
+{% block footer_scripts %}
+  {% load_script_hash 'app.js' %}
+{% endblock %}
+{#% endspaceless %#}
+</body>
+</html>

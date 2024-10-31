@@ -1,5 +1,7 @@
 # -*- coding:utf-8 -*-
 
+from typing import Optional
+
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core.validators import ValidationError, validate_email
 
@@ -11,7 +13,8 @@ class ProfileUserManager(UserManager):
             return None
         return email.strip().lower()
 
-    def create_user(self, username=None, email=None, password=None, **extra_fields):
+    def create_user(self, username: Optional[str] = None, email: Optional[str] = None, password: Optional[str] = None,
+                    **extra_fields):
         if "is_active" not in extra_fields:
             extra_fields["is_active"] = False
         username, email = self._prepare_login_fields(username, email)
@@ -30,7 +33,10 @@ class ProfileUserManager(UserManager):
         return username, email
 
     def create_superuser(
-        self, username=None, email=None, password=None, **extra_fields
+        self, username: Optional[str] = None,
+        email: Optional[str] = None,
+        password: Optional[str] = None,
+        **extra_fields,
     ):
         extra_fields["is_active"] = True
         username, email = self._prepare_login_fields(username, email)
