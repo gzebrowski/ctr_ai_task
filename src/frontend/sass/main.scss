@@ -1,39 +1,5 @@
-:root {
-  --primary: #2203860F;
-  --bg-box-color: #fff;
-  --font-color: #444;
-  --font-color-on-primary: #fff;
-}
-
-:root .acc_theme_dark {
-
-}
-
-body {
-  background-color: #f8f8f8;
-}
-
-a {
-  &.btn {
-    display: inline-block;
-    padding: 0.3em 0.5em;
-    &.primary {
-      background-color: var(--primary);
-      color: var(--font-color-on-primary);
-      text-align: center;
-    }
-  }
-}
-
-.app-box {
-  background-color: var(--bg-box-color);
-
-}
-
-.align-center {
-  text-align: center;
-}
-
-.rounded-3 {
-  border-radius: 2em;
-}
+@use 'initials';
+@use 'fonts';
+@use 'generic_classes';
+@use 'reactive';
+@use 'base';

@@ -17,8 +17,9 @@ const CtrlMainApp = {
   },
   computed: {
     isLinkValid() {
-      const isValid = this.linktToShortcut &&  this.linktToShortcut.match(
-        /^https?:\/\/[a-z0-9-]+(\.[a-z0-9-])*(\/[^\s]+)?$/i);
+      const isValid = this.linktToShortcut && this.linktToShortcut.match(
+        /^https?:\/\/[a-z0-9-]+(\.[a-z0-9-])*(\/[^\s]+)?$/i,
+      );
       return isValid;
     },
   },

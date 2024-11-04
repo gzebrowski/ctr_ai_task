@@ -1,21 +1,23 @@
+import axios from 'axios';
+
 export class Http {
   private apiRoot: string;
 
-  private defaultHeaders: any;
+  private defaultHeaders: object;
 
-  constructor(apiRoot = '/', defaultHeaders: any = null) {
+  constructor(apiRoot = '/', defaultHeaders?: object = null) {
     this.defaultHeaders = defaultHeaders || {};
     this.apiRoot = apiRoot;
   }
 
-  prepareUrl(url: string, params?: any, options?: any) { // eslint-disable-line
+  prepareUrl(url: string, params?: any, options?: object) { // eslint-disable-line
     let theApiRoot = this.apiRoot;
     if (url && url[0] === '/') {
       theApiRoot = '';
     }
     let params2 = params;
     if (params && typeof params === 'object') {
-      const q: any[] = [];
+      const q: string[] = [];
       Object.keys(params).forEach((key) => {
         const val = params[key];
         q.push(`${key}=${encodeURIComponent(val)}`);
@@ -32,9 +34,9 @@ export class Http {
 
   prepareDefaultHeaders() {
     const headers = this.defaultHeaders || {};
-    const finalHeaders: any = {};
+    const finalHeaders: object = {};
     let val = null;
-    Object.keys(headers).forEach((k) => {
+    Object.keys(headers).forEach((k: string) => {
       if (typeof headers[k] === 'function') {
         val = headers[k]();
       } else {
@@ -47,7 +49,7 @@ export class Http {
     return finalHeaders;
   }
 
-  applyHeaders(p?: any) {
+  applyHeaders(p?: object) {
     const p2 = { ...(p || {}) };
     if (this.defaultHeaders) {
       const hdrs = this.prepareDefaultHeaders();
@@ -58,11 +60,11 @@ export class Http {
   }
 
   // eslint-disable-next-line no-unused-vars
-  processResponse(response: any) { // eslint-disable-line
+  processResponse(response: object) { // eslint-disable-line
   }
 
-  sendReq(method: string, url: string, httpParams?: any, options?: any) { // eslint-disable-line
-    const promiseObj = new Promise((resolve, reject) => {
+  sendReq(method: string, url: string, httpParams?: object, options?: object) { // eslint-disable-line
+    const promiseObj = new Promise((resolve: () => void, reject: () => void) => {
       let httpParams2 = { ...(httpParams || {}) };
       httpParams2.url = url;
       httpParams2.method = method;
@@ -72,34 +74,27 @@ export class Http {
         delete httpParams.options;
       }
       if (options2) {
-        httpParams2 = $.extend(true, httpParams2, options2);
+        httpParams2 = { ...httpParams2, ...options2 };
       }
-      if (method === 'tst') {
-        consoleLog('test req', httpParams2);
-        setTimeout(() => {
-          resolve({ status: 'OK' });
-        });
-      } else {
-        axios(httpParams2)
-          .then((response) => {
-            this.processResponse(response);
-            if (response.data && response.data.action === 'redirect') {
-              if (response.data.url) {
-                window.location.href = response.data.url;
-                return;
-              }
+      axios(httpParams2)
+        .then((response: object) => {
+          this.processResponse(response);
+          if (response.data && response.data.action === 'redirect') {
+            if (response.data.url) {
+              window.location.href = response.data.url;
+              return;
             }
-            resolve(response.data);
-          })
-          .catch((error) => {
-            reject(error.response);
-          });
-      }
+          }
+          resolve(response.data);
+        })
+        .catch((error: object) => {
+          reject(error.response);
+        });
     });
     return promiseObj;
   }
 
-  static xCheckParamsOpts(params?: any, options?: any) {
+  static xCheckParamsOpts(params?: object, options?: object) {
     let result;
     if (params && typeof params === 'object' && !options && (params.statusEvent || params.apiRoot)) {
       // in that case first param is "options", not params...
@@ -110,14 +105,14 @@ export class Http {
     return result;
   }
 
-  xGetCommon(method: string, url: string, config?: any, options?: any) {
+  xGetCommon(method: string, url: string, config?: object, options?: object) {
     const parOpt = Http.xCheckParamsOpts(config, options);
     const finalurl = this.prepareUrl(url, parOpt.params.getParams, parOpt.options);
     if (finalurl.baseURL) { parOpt.params.baseURL = finalurl.baseURL; }
     return this.sendReq(method, finalurl.url, parOpt.params, parOpt.options);
   }
 
-  xPostCommon(method: string, url: string, data?: any, params?: any, options?: any) {
+  xPostCommon(method: string, url: string, data?: object, params?: object, options?: object) {
     // params - axios specific request configuration, options - app specific configuration
     const parOpt = Http.xCheckParamsOpts(params, options);
     const finalurl = this.prepareUrl(url, parOpt.params.getParams, parOpt.options);
@@ -126,7 +121,7 @@ export class Http {
     return this.sendReq(method, finalurl.url, parOpt.params, parOpt.options);
   }
 
-  get(url: string, getParams?: any, config?: any, options?: any) {
+  get(url: string, getParams?: object, config?: object, options?: object) {
     // for get method we can pass object with GET params as second parameter
     const config2 = { ...(config || {}) };
     if (getParams) {
@@ -135,31 +130,31 @@ export class Http {
     return this.xGetCommon('get', url, config2, options);
   }
 
-  tst(url: string, data?: any, config?: any, options?: any) {
+  tst(url: string, data?: object, config?: object, options?: object) {
     return this.xPostCommon('tst', url, data, config, options);
   }
 
-  post(url: string, data?: any, config?: any, options?: any) {
+  post(url: string, data?: object, config?: object, options?: object) {
     return this.xPostCommon('post', url, data, config, options);
   }
 
-  put(url: string, data?: any, config?: any, options?: any) {
+  put(url: string, data?: object, config?: object, options?: object) {
     return this.xPostCommon('put', url, data, config, options);
   }
 
-  patch(url: string, data?: any, config?: any, options?: any) {
+  patch(url: string, data?: object, config?: object, options?: object) {
     return this.xPostCommon('patch', url, data, config, options);
   }
 
-  delete(url: string, config?: any, options?: any) {
+  delete(url: string, config?: object, options?: object) {
     return this.xGetCommon('delete', url, config, options);
   }
 
-  head(url: string, config?: any, options?: any) {
+  head(url: string, config?: object, options?: object) {
     return this.xGetCommon('head', url, config, options);
   }
 
-  options(url: string, config?: any, options?: any) {
+  options(url: string, config?: object, options?: object) {
     return this.xGetCommon('options', url, config, options);
   }
 }
