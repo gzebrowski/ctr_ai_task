@@ -42,6 +42,9 @@ const CtrlMainApp = {
       });
     },
     storeLink(originalUrl: string, shortenedUrl: string) {
+      if (this.lastLinks.filter((itm: object) => itm.shortenedUrl === shortenedUrl).length) {
+        return;
+      }
       this.lastLinks.unshift({ originalUrl, shortenedUrl });
       if (this.lastLinks.length > 3) {
         this.lastLinks.length = 3;

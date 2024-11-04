@@ -8,6 +8,9 @@
 .w-100 {
   width: 100% !important;
 }
+.w-75 {
+  width: 75% !important;
+}
 .p-3 {
   padding: 1em !important;
 }
@@ -21,7 +24,15 @@
 .ml-3 {
   margin-left: 1em !important;
 }
-
+.pl-3 {
+  padding-left: 1em !important;
+}
+.pl-5 {
+  padding-left: 2em !important;
+}
+.pr-5 {
+  padding-right: 2em !important;
+}
 .my-3 {
   margin-top: 1em !important;
   margin-bottom: 1em !important;
@@ -29,13 +40,35 @@
 .pr-4 {
   padding-right: 1.4em !important;
 }
+.mt-5 {
+  margin-top: 2em !important;
+}
+.mb-2 {
+  margin-bottom: 0.75em !important;
+}
+.mt-4 {
+  margin-top: 1.5em !important;
+}
+.mt-3 {
+  margin-top: 1em !important;
+}
+.px-5 {
+  padding-right: 2em !important;
+  padding-left: 2em !important;
+}
+.py-3 {
+  padding-top: 1em !important;
+  padding-bottom: 1em !important;
+}
 .align-left {
   text-align: left !important;
 }
 .align-center {
   text-align: center !important;
 }
-
+.rounded-2 {
+  border-radius: 1.2em !important;
+}
 .rounded-3 {
   border-radius: 2em !important;
 }
@@ -54,6 +87,12 @@
 .abs-right {
   right: 0;
 }
+.abs-top {
+  top: 0;
+}
 .z9 {
   z-index: 9;
+}
+.border-2 {
+  border: 2px solid var(--border-color);
 }

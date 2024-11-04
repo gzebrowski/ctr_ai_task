@@ -19,7 +19,7 @@ a {
   cursor: pointer;
   &.btn {
     display: inline-block;
-    padding: 0.3em 0.5em;
+    padding: 0.5em 0.5em;
     &.primary {
       background-color: var(--primary);
       color: var(--font-color-on-primary);
@@ -33,11 +33,13 @@ a {
 }
 
 .app-box {
-  background-color: var(--bg-box-color);
   width: 26em;
-  padding: 2em 1em;
+  padding: 2em 2em;
 }
 
+.box-bg {
+  background-color: var(--bg-box-color);
+}
 input[readonly] {
   background-color: #FAFAFA;
 }
