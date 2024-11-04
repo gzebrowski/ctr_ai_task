@@ -1,5 +1,6 @@
 import baseCtrlMixIn from '@/controllers/baseController';
 import httpApi from '@/utils/http';
+import helpers from '@/utils/utils';
 /*
 Used as controller of help center page. This is the place to add specific logic for it
 */
@@ -15,6 +16,7 @@ const CtrlMainApp = {
       linkToShortcut: '',
       currentRedirectUrl: '',
       sending: false,
+      lastLinks: [],
     };
   },
   computed: {
@@ -26,15 +28,25 @@ const CtrlMainApp = {
     },
   },
   created() {
-    // TODO
+    this.lastLinks = helpers.localStorage.get('lastLinks') || [];
   },
   methods: {
     shortenLink() {
       this.sending = true;
       httpApi.post('short-url', { original_url: this.linkToShortcut }).then((resp: object) => {
         this.sending = false;
-        this.currentRedirectUrl = resp.redirect_to;
+        if (resp.redirect_to) {
+          this.currentRedirectUrl = resp.redirect_to;
+          this.storeLink(this.linkToShortcut, resp.redirect_to);
+        }
       });
+    },
+    storeLink(originalUrl: string, shortenedUrl: string) {
+      this.lastLinks.unshift({ originalUrl, shortenedUrl });
+      if (this.lastLinks.length > 3) {
+        this.lastLinks.length = 3;
+      }
+      helpers.localStorage.set('lastLinks', this.lastLinks);
     },
   },
 };

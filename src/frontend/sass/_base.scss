@@ -35,9 +35,7 @@ a {
 .app-box {
   background-color: var(--bg-box-color);
   width: 26em;
-  margin: auto;
   padding: 2em 1em;
-  display: inline-block;
 }
 
 input[readonly] {
@@ -106,4 +104,10 @@ input[type=text] {
     background-color: var(--bg-box-color);
     color: var(--message-ok);
   }
+}
+.hideovf {
+  width: 100%;
+  white-space: nowrap;
+  display: inline-block;
+  overflow: hidden;
 }
