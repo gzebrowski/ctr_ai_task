@@ -12,13 +12,15 @@ const CtrlMainApp = {
   ],
   data(): object {
     return {
-      linktToShortcut: '',
+      linkToShortcut: '',
+      currentRedirectUrl: '',
+      sending: false,
     };
   },
   computed: {
     isLinkValid() {
-      const isValid = this.linktToShortcut && this.linktToShortcut.match(
-        /^https?:\/\/[a-z0-9-]+(\.[a-z0-9-])*(\/[^\s]+)?$/i,
+      const isValid = this.linkToShortcut && this.linkToShortcut.match(
+        /^https?:\/\/[a-z0-9-]+(\.[a-z0-9-]+)*(\/[^\s]+)?$/i,
       );
       return isValid;
     },
@@ -28,7 +30,11 @@ const CtrlMainApp = {
   },
   methods: {
     shortenLink() {
-      httpApi.post();
+      this.sending = true;
+      httpApi.post('short-url', { original_url: this.linkToShortcut }).then((resp: object) => {
+        this.sending = false;
+        this.currentRedirectUrl = resp.redirect_to;
+      });
     },
   },
 };

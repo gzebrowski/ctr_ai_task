@@ -16,6 +16,7 @@ body {
 
 
 a {
+  cursor: pointer;
   &.btn {
     display: inline-block;
     padding: 0.3em 0.5em;
@@ -23,6 +24,10 @@ a {
       background-color: var(--primary);
       color: var(--font-color-on-primary);
       text-align: center;
+    }
+    &.disabled {
+      cursor: default;
+      background-color: var(--primary-disabled);
     }
   }
 }
@@ -35,13 +40,6 @@ a {
   display: inline-block;
 }
 
-.align-center {
-  text-align: center;
-}
-
-.rounded-3 {
-  border-radius: 2em;
-}
 input[readonly] {
   background-color: #FAFAFA;
 }
@@ -73,4 +71,10 @@ input[type=text] {
 }
 .main-app {
   height: 100vh;
+}
+.app-logo {
+  margin: 3em 0;
+}
+.primary {
+  color: var(--primary);
 }

@@ -161,7 +161,7 @@ export class Http {
 
 export class HttpApi extends Http {
   constructor() {
-    super('/api/v1/', {});
+    super('/api/', {});
   }
 }
 

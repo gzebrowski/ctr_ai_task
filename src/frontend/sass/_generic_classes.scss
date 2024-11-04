@@ -1,6 +1,9 @@
 .d-inline-block {
   display: inline-block;
 }
+.d-block {
+  display: block;
+}
 
 .w-100 {
   width: 100%;
@@ -17,4 +20,21 @@
 }
 .ml-3 {
   margin-left: 1em;
+}
+
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+
+.rounded-3 {
+  border-radius: 2em;
+}
+.small {
+  font-size: 0.75em;
+}
+.disabled {
+  pointer-events: none;
 }

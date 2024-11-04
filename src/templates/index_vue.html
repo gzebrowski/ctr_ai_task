@@ -12,14 +12,16 @@
       </div>
       <h2 class="box-title center mb-3">Short link</h2>
       <div class="input-box mb-3">
-        <label>Link to shortcut</label>
-        <input type="text" class="input-tp1 ml-3 d-inline-box" v-model="linktToShortcut">
+        <label class="d-block align-left primary small">Link to shortcut</label>
+        <input type="text" class="input-tp1 d-block w-100" v-model="linkToShortcut">
       </div>
       <div class="btn-container">
         <a class="btn primary rounded-3 d-inline-block w-100" @click="shortenLink()"
-           :class="{disabled: !isLinkValid}">Shorten it</a>
+           :class="{disabled: sending || !isLinkValid}">Shorten it</a>
       </div>
-
+      <div v-if="currentRedirectUrl">
+        <input type="text" readonly v-model="currentRedirectUrl">
+      </div>
     </div>
   </div>
 </div>
