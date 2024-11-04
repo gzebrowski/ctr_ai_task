@@ -27,7 +27,8 @@
       <div v-if="lastLinks.length > 0" class="align-left">
         <h5 class="mt-5 pl-5">Last links</h5>
         <div class="mb-3 rounded-3 border-2 mt-3 p-3 app-box">
-          <div v-for="lastLink in lastLinks" class="box-bg rounded-2 py-3 px-5 mb-2">
+          <div v-for="(lastLink, index) in lastLinks" :class="{'mt-2': index > 0}"
+               class="box-bg rounded-2 py-3 px-5 unset-last-child-margin">
             <copy-link :original-link="lastLink.originalUrl" :url="lastLink.shortenedUrl"></copy-link>
           </div>
         </div>
