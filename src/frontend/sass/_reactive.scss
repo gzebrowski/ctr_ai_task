@@ -1,0 +1,7 @@
+$max_page_width: 1440px;
+
+@media (max-width: $max_page_width) {
+  body {
+    font-size: var(--base-font-size-rel); // 16/1440=1.11
+  }
+}
