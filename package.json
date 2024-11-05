@@ -53,6 +53,6 @@
   },
   "scripts": {
     "dev": "webpack --watch --mode=development --config ./webpack/webpack.config.js",
-    "build": "webpack --config ./webpack/webpack.config.js"
+    "build": "webpack --mode=production --config ./webpack/webpack.config.js"
   }
 }
