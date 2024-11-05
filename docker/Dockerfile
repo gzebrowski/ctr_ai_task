@@ -28,6 +28,7 @@ COPY ["requirements.txt", "./"]
 RUN pip install --no-cache --disable-pip-version-check -r requirements.txt
 
 COPY ./src/ .
+COPY .env /usr/src/app/
 COPY --from=webpack-builder /usr/src/app/src/static/webpack_bundles ./static/webpack_bundles
 COPY --from=webpack-builder /usr/src/app/src/templates/dynamic/build_hash.txt ./src/templates/dynamic/build_hash.txt
 

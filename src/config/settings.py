@@ -21,7 +21,7 @@ env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
 )
-
+environ.Env.read_env(BASE_DIR / '../.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
