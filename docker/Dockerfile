@@ -29,7 +29,6 @@ RUN pip install --no-cache --disable-pip-version-check -r requirements.txt
 
 COPY ./src/ .
 COPY --from=webpack-builder /usr/src/app/src/static/webpack_bundles ./static/webpack_bundles
-COPY --from=webpack-builder /usr/src/app/src/webpack-stats.json ./webpack-stats.json
 COPY --from=webpack-builder /usr/src/app/src/templates/dynamic/build_hash.txt ./src/templates/dynamic/build_hash.txt
 
 COPY ./docker/scripts/ /usr/src/scripts
